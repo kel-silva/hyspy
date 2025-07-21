@@ -414,7 +414,7 @@ app.get('/dashboard',autenticar, (req, res) => {//autenticação
     <html lang="pt-BR">
     <head>
       <meta charset="UTF-8">
-      <title>Dashboard - Igreja Esperança Viva</title>
+      <title>Dashboard - Captura de Dados Hyspy</title>
       <style>
         body {
           font-family: 'Segoe UI', sans-serif;
