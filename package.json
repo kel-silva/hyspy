@@ -14,7 +14,11 @@
   "dependencies": {
     "axios": "^1.10.0",
     "basic-auth": "^2.0.1",
+<<<<<<< HEAD
     "express": "^5.1.0",
     "pdfkit": "^0.17.1"
+=======
+    "express": "^5.1.0"
+>>>>>>> 90cf3985b48f8e01857608783561ca4a4b2c8bc1
   }
 }

